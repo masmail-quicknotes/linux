@@ -49,21 +49,21 @@
 
 # Netplan
 
-> vi /etc/netplan/99-netcfg.yaml
->> network:
->>   version: 2
->>   renderer: networkd
->>   ethernets:
->>     ens192:
->>       dhcp4: no
->>       dhcp6: no
->>       addresses:
->>         - 192.168.1.100/24
->>       gateway4: 192.168.1.1
->>       nameservers:
->>         addresses:
->>           - 9.9.9.9
->>           - 8.8.8.8
+> vi /etc/netplan/99-netcfg.yaml \
+>> network: \
+>>   version: 2 \
+>>   renderer: networkd \
+>>   ethernets: \
+>>     ens192: \
+>>       dhcp4: no \
+>>       dhcp6: no \
+>>       addresses: \
+>>         - 192.168.1.100/24 \
+>>       gateway4: 192.168.1.1 \
+>>       nameservers: \
+>>         addresses: \
+>>           - 9.9.9.9 \
+>>           - 8.8.8.8 \
           
 > netplan apply
 
@@ -81,57 +81,57 @@
 
 # Shell-script
 
-> #!/bin/bash
->
-> ECHO=$(which echo)
-> CAT=$(which cat)
-> NMAP=$(which nmap)
-> RM=$(which rm)
-> DIFF=$(which diff)
+> #!/bin/bash \
+> \
+> ECHO=$(which echo) \
+> CAT=$(which cat) \
+> NMAP=$(which nmap) \
+> RM=$(which rm) \
+> DIFF=$(which diff) \
 > ...
 
 # Function 
 
-> function Usage () {
->         ${ECHO} -e "SYNTAX ERROR: ${0} [opcion1|opcion2] <nombre>\n"
->         exit 1
-> }
+> function Usage () { \
+>         ${ECHO} -e "SYNTAX ERROR: ${0} [opcion1|opcion2] <nombre>\n" \
+>         exit 1 \
+> } \
   
 ## if - elif - else - fi  
 
 Verificamos los parametros si son nulos, y si primer parametro contiene valor correcto.
 
-> if [[ -z ${1} ]] || [[ -z ${2} ]] ; then
->         Usage
-> elif [[ "${1}" != "opcion1" ]] && [[ "${1}" != "opcion2" ]] ; then
->         Usage
-> else
-> 	accion="${1}"
-> 	nombre="${2}"
+> if [[ -z ${1} ]] || [[ -z ${2} ]] ; then \
+>         Usage \
+> elif [[ "${1}" != "opcion1" ]] && [[ "${1}" != "opcion2" ]] ; then \
+>         Usage \
+> else \
+> 	accion="${1}" \
+> 	nombre="${2}" \
 > fi
 
 Si fichero existe entonces lo borramos:
 
->   if [[ -f "${nombreFichero}" ]] ; then
->      ${RM} ${nombreFichero}
+>   if [[ -f "${nombreFichero}" ]] ; then \
+>      ${RM} ${nombreFichero} \
 >   fi
 
 
 ## Petición parámetros
 
-> ${ECHO} "Introduce un nombre:"
+> ${ECHO} "Introduce un nombre:" \
 > read -s nombre
 
 ## Case 
 
->   case $opcion in
->       0)
->          ${ECHO} -e "[CORRECTO];"
->          ;;
->       *)
->          ${ECHO} -e "[INCORRECTO];"
->          ;;
->   esac
+>   case $opcion in \
+>       0) \
+>          ${ECHO} -e "[CORRECTO];" \
+>          ;; \
+>       *) \
+>          ${ECHO} -e "[INCORRECTO];" \
+>          ;; \
+>   esac \
 
 ***
 # Diff
@@ -151,15 +151,15 @@ Las líneas con contenido "ntp clock-period" son ignoradas.
 > diff --ignore-matching-lines="ntp clock-period" fichero1.txt fichero2.txt
 
 ## Comandos utilies del diff 
-> diff
->       --suppress-blank-empty     suppress space or tab before empty output lines              
->       -y, --side-by-side         output in two columns
->       -w, --ignore-all-space     ignore all white space
->       -B, --ignore-blank-lines   ignore changes where lines are all blank
->       -i, --ignore-case          ignore case differences in file contents
->       -E, --ignore-tab-expansion ignore changes due to tab expansion
->       -q, --brief                report only when files differ
->       --suppress-common-lines    do not output common lines
+> diff \
+>       --suppress-blank-empty     suppress space or tab before empty output lines   \            
+>       -y, --side-by-side         output in two columns \
+>       -w, --ignore-all-space     ignore all white space \
+>       -B, --ignore-blank-lines   ignore changes where lines are all blank \
+>       -i, --ignore-case          ignore case differences in file contents \
+>       -E, --ignore-tab-expansion ignore changes due to tab expansion \
+>       -q, --brief                report only when files differ \
+>       --suppress-common-lines    do not output common lines \
 
 ***
 
