@@ -49,7 +49,7 @@
     sudo /etc/init.d/rsyslog restart
 
 # Netplan
-
+    \& 
 Ejemplo fichero netplan:
 
     vi /etc/netplan/99-netcfg.yaml 
