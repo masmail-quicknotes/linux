@@ -10,7 +10,7 @@
   
 - [Shell-script](#shell-script)
   - [Inicio Bash](#inicio-bash)
-  - [Function](#Function)
+  - [Function](#function)
   - [IF - ELIF - ELSE - FI ](#if-elif-else-fi)
   - [Petición parámetros](#peticion-parámetros)
   - [case](#case)  
@@ -39,12 +39,12 @@
     -A LOGGING -m limit --limit 2 \/min -j LOG --log-prefix "IPTables:DROP: "
     -A LOGGING -j DROP
     COMMIT
-    \# Completed on Thu Mar  5 11:22:52 2020
-    
-    cat /etc/rsyslog.d/40-iptables.conf 
-    :msg, regex, "iptables:" -/var/log/firewall.log
-     & ~
-    
+    \# Completed on Thu Mar  5 11:22:52 2020 \
+     \
+    cat /etc/rsyslog.d/40-iptables.conf \
+    :msg, regex, "iptables:" -/var/log/firewall.log \
+    & ~ \
+     \
     sudo /etc/init.d/rsyslog restart
 
 
@@ -84,7 +84,7 @@ Ejemplo fichero netplan:
 
 # Shell-script
 
-# Inicio bash
+## Inicio bash
 
     #!/bin/bash
     
@@ -95,7 +95,7 @@ Ejemplo fichero netplan:
     DIFF=$(which diff)
      ...
 
-# Function 
+## Function
 
     function Usage () {
             ${ECHO} -e "SYNTAX ERROR: ${0} [opcion1|opcion2] <nombre>\n"
