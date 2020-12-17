@@ -11,8 +11,8 @@
 - [Shell-script](#shell-script)
   - [Inicio Bash](#inicio-bash)
   - [Function](#function)
-  - [IF - ELIF - ELSE - FI ](#if-elif-else-fi)
-  - [Petición parámetros](#peticion-parámetros)
+  - [IF - ELIF - ELSE - FI ](#if---elif---else---fi)
+  - [Petición parámetros](#petición-parámetros)
   - [case](#case)  
   
 - [Diff](#diff)
@@ -40,13 +40,12 @@
     -A LOGGING -j DROP
     COMMIT
     \# Completed on Thu Mar  5 11:22:52 2020 \
-     \
-    cat /etc/rsyslog.d/40-iptables.conf \
-    :msg, regex, "iptables:" -/var/log/firewall.log \
-    & ~ \
-     \
+     
+    cat /etc/rsyslog.d/40-iptables.conf
+    :msg, regex, "iptables:" -/var/log/firewall.log
+    & ~
+    
     sudo /etc/init.d/rsyslog restart
-
 
 # Netplan
 
