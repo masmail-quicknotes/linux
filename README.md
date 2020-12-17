@@ -41,9 +41,9 @@
     COMMIT
     \# Completed on Thu Mar  5 11:22:52 2020 \
      
-    cat /etc/rsyslog.d/40-iptables.conf
-    :msg, regex, "iptables:" -/var/log/firewall.log
-    & ~
+    vi \/etc\/rsyslog.d\/40-iptables.conf    
+    :msg, regex, "iptables:" -\/var\/log\/firewall.log    
+    \& \~
     
     sudo /etc/init.d/rsyslog restart
 
