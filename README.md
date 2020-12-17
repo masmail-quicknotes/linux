@@ -39,10 +39,11 @@
     -A LOGGING -m limit --limit 2 \/min -j LOG --log-prefix "IPTables:DROP: "
     -A LOGGING -j DROP
     COMMIT
-    \# Completed on Thu Mar  5 11:22:52 2020 \
+    \# Completed on Thu Mar  5 11:22:52 2020 
      
     vi \/etc\/rsyslog.d\/40-iptables.conf    
-    :msg, regex, "iptables:" -\/var\/log\/firewall.log    
+    :msg, regex
+    , "iptables:" -\/var\/log\/firewall.log    
     \& \~
     
     sudo /etc/init.d/rsyslog restart
