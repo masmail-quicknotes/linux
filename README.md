@@ -15,7 +15,16 @@
   - [Petición parámetros](#petición-parámetros)
   - [case](#case)  
   
-- [Diff](#diff)
+- [diff](#diff)
+
+- [grep](#grep)
+
+- [sort & uniq](#sort-&-uniq)
+
+- [sed](#sed)
+
+- [awk](#awk)
+
 
 ***
 
@@ -175,6 +184,165 @@ Las líneas con contenido "ntp clock-period" son ignoradas.
 
 ***
 
+# Find
+
+## Find searches a directory for files 
+
+    find /tmp -type d -print
+
+## Find a filename
+
+    find / -name '*.txt'
+    
+## Find type
+
+    find -type [TYPE]
+      f: regular file
+      d: directory
+      l: symlink
+      p: named pipe
+      s: socket
+      
+    find /tmp -type d,l
+
+## Find path and ipath
+
+Search the full path, and ipath (case insensitive)
+
+    find / -path '*tmp*/*'
+  
+## Find maxdepth
+
+Only descend NUM levels when searching a directory.
+
+    find / -path '*tmp*/*' -maxdepth 2
+    
+## Find -mtime
+
+Files that were modified at most NUM days in the past.
+
+    find / -name '*.py' -mtime 2
+
+## Find -print
+
+Action: print filename of files found.
+
+    find . -name '*.py' -mtime 0 -print
+    ./test.py
+    ./test3.py
+    ./test2.py
+
+    find . -name '*.py' -mtime 0 -print0 
+    ./test.py./test3.py./test2.py
+
+    find . -name '*.py' -mtime 0 -print0 | xargs -0
+    ./test.py ./test3.py ./test2.py
+
+## Find -exec
+
+Action: run COMMAND on every file found.
+
+    find . -name '*.py' -mtime 0 -exec ls -l '{}' \;
+    find . -name '*.py' -mtime 0 -exec cat '{}' \;
+
+## Find -delete
+
+Action: delete all files found
+
+    find . -name '*.py' -mtime 0 -delete
+
+## Locate and updatedb
+
+The `locate` command searches a adatabase of eery file on your system. Faster than find, but cant get out of date.
+
+Updates the database:
+
+    $ sudo updatedb
+    
+***
+
+# grep
+
+`grep` lets you search fiels for text
+
+# grep -i
+
+Case insensitive.
+
+    $ grep -i Apple foo.txt 
+    apple
+
+# grep -e or egrep
+
+Search regular expressions.
+
+    $ grep -e '^....$' foo.txt 
+    kiwi
+
+# grep -v
+
+Invert match, find all lines that don't match.
+
+    $ grep -ve '^....$' foo.txt 
+    apple
+    banana
+    orange
+
+# grep -l
+
+Only show the filenames of the files that matched.
+
+    $ grep -le '^....$' *.txt 
+    foo.txt
+
+# grep -o
+
+Only print the matching part of the line (not the whole line).
+
+    $ grep 'kiwi' foo.txt 
+    kiwi
+    kiwi with orange
+
+    $ grep -o 'kiwi' foo.txt 
+    kiwi
+    kiwi
+
+# grep -A -B -C
+
+Show `context` for your search.
+
+Will show 1 line of context `a`fter a match, `b`efore a match, `c`ontext.
+
+    $ grep -A 1 'banana' foo.txt 
+    banana
+    orange
+
+    $ grep -B 1 'banana' foo.txt 
+    apple
+    banana
+
+    $ grep -C 1 'banana' foo.txt 
+    apple
+    banana
+    orange
+
+# grep -F
+
+Don't treat the match string as a regex.
+
+# grep -r
+
+Recursive. Search all the files in a directory.
+
+# grep -a 
+
+Search binaries: threat binary data like it's text instead of ignoring it.
+
+***
+
+***
+
 ## URLs Referencia:
 
 - <https://www.computerhope.com/unix/udiff.htm>
+- <https://twitter.com/b0rk>
