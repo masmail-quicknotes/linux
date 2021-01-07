@@ -265,21 +265,21 @@ Updates the database:
 
 `grep` lets you search fiels for text
 
-# grep -i
+## grep -i
 
 Case insensitive.
 
     $ grep -i Apple foo.txt 
     apple
 
-# grep -e or egrep
+## grep -e or egrep
 
 Search regular expressions.
 
     $ grep -e '^....$' foo.txt 
     kiwi
 
-# grep -v
+## grep -v
 
 Invert match, find all lines that don't match.
 
@@ -288,14 +288,14 @@ Invert match, find all lines that don't match.
     banana
     orange
 
-# grep -l
+## grep -l
 
 Only show the filenames of the files that matched.
 
     $ grep -le '^....$' *.txt 
     foo.txt
 
-# grep -o
+## grep -o
 
 Only print the matching part of the line (not the whole line).
 
@@ -307,7 +307,7 @@ Only print the matching part of the line (not the whole line).
     kiwi
     kiwi
 
-# grep -A -B -C
+## grep -A -B -C
 
 Show `context` for your search.
 
@@ -326,19 +326,108 @@ Will show 1 line of context `a`fter a match, `b`efore a match, `c`ontext.
     banana
     orange
 
-# grep -F
+## grep -F
 
 Don't treat the match string as a regex.
 
-# grep -r
+## grep -r
 
 Recursive. Search all the files in a directory.
 
-# grep -a 
+## grep -a 
 
 Search binaries: threat binary data like it's text instead of ignoring it.
 
 ***
+
+# sort & uniq
+
+`sort` sorts its input. The default sort is alphabetical.
+
+    $ sort foo.txt 
+    apple,10
+    banana,5
+    kiwi with orange,10000
+    kiwi,500
+    orange,1000
+
+## sort -n
+
+Numeric sort on second column.
+
+    $ sort -n -t ',' -k 2 foo.txt 
+    banana,5
+    apple,10
+    kiwi,500
+    orange,1000
+    kiwi with orange,10000
+
+## sort -h
+
+Human sort.
+
+    $ sort -h -t ',' -k 2 foo.txt 
+    banana,5
+    apple,10
+    kiwi,500
+    orange,1K
+    kiwi with orange,10K
+
+Useful example:
+
+    $ du -sh * | sort -h
+
+## sort + uniq
+
+Pipe something to `sort | uniq` and you'll get a deduplicated list of lines. `sort -u` does the same thing.
+
+    $ cat foo2.txt 
+    apple
+    banana
+    orange
+    apple
+    kiwi
+    orange
+    orange
+    kiwi
+    apple
+    orange
+
+    $ cat foo2.txt | sort | uniq
+    apple
+    banana
+    kiwi
+    orange
+
+    $ sort -u foo2.txt 
+    apple
+    banana
+    kiwi
+    orange
+
+`uniq -c` counts each line it saw.
+
+    $ cat foo2.txt | sort | uniq -c
+          3 apple
+          1 banana
+          2 kiwi
+          4 orange
+
+Get the top 10 most common lines in a file.
+
+    $ sort foo2.txt | uniq -c | sort -rn | tail -n 10
+          4 orange
+          3 apple
+          2 kiwi
+          1 banana
+
+***
+
+# sed
+
+`sed` is most often used for replacing text in a file.
+
+
 
 ***
 
