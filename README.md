@@ -427,6 +427,261 @@ Get the top 10 most common lines in a file.
 
 `sed` is most often used for replacing text in a file.
 
+## sed replace
+
+Replaces orange by lemon.  
+  
+    $ sed s/orange/lemon/g foo2.txt 
+    apple
+    banana
+    lemon
+    apple
+    kiwi
+    lemon
+    lemon
+    kiwi
+    apple
+    lemon
+
+## sed delete
+
+Delete 5th line.
+
+    $sed 5d foo2.txt 
+    apple
+    banana
+    orange
+    apple
+    orange
+    orange
+    kiwi
+    apple
+    orange
+
+Delete lines matching `kiwi`.
+
+    $ sed /kiwi/d foo2.txt 
+    apple
+    banana
+    orange
+    apple
+    orange
+    orange
+    apple
+    orange
+
+## sed print
+
+Print line 5-8
+
+    $ cat -n foo2.txt 
+         1	apple
+         2	banana
+         3	orange
+         4	apple
+         5	kiwi
+         6	orange
+         7	orange
+         8	kiwi
+         9	apple
+        10	orange
+    
+    $ sed -n 5,8p foo2.txt 
+    kiwi
+    orange
+    orange
+    kiwi
+
+## sed change in place
+
+Change a file in place with `-i`.
+
+    $ sed -i s/orange/lemon/g foo2.txt 
+
+    $ cat foo2.txt 
+    apple
+    banana
+    lemon
+    apple
+    kiwi
+    lemon
+    lemon
+    kiwi
+    apple
+    lemon
+
+    $ sed -i s/lemon/orange/g foo2.txt 
+
+    $ cat foo2.txt 
+    apple
+    banana
+    orange
+    apple
+    kiwi
+    orange
+    orange
+    kiwi
+    apple
+    orange
+
+## sed changed lines
+
+Only print changed lines.
+
+    $ sed -n s/orange/lemon/p foo2.txt
+    lemon
+    lemon
+    lemon
+    lemon
+
+## sed regex delimeter
+
+Use this if your regex has a `/` in it.
+
+    $ sed s#orange#lemon#g foo2.txt
+    apple
+    banana
+    lemon
+    apple
+    kiwi
+    lemon
+    lemon
+    kiwi
+    apple
+    lemon
+
+## sed double space a file
+
+Double space a file.
+
+    $ sed G foo2.txt 
+    apple
+
+    banana
+
+    orange
+
+    apple
+
+    kiwi
+
+    orange
+
+    orange
+
+    kiwi
+
+    apple
+
+    orange
+
+## sed append after
+
+Added `grape` `a`fter `banana`.
+
+    $ sed '/banana/a grape' foo2.txt 
+    apple
+    banana
+    grape
+    orange
+    apple
+    kiwi
+    orange
+    orange
+    kiwi
+    apple
+    orange
+
+## sed insert on line
+
+Inserted `grape` before `banana`.
+
+    $ sed '/banana/i grape' foo2.txt 
+    apple
+    grape
+    banana
+    orange
+    apple
+    kiwi
+    orange
+    orange
+    kiwi
+    apple
+    orange
+
+Insert on line number 4 `grape`
+
+    $ sed '4i grape' foo2.txt 
+    apple
+    banana
+    orange
+    grape
+    apple
+    kiwi
+    orange
+    orange
+    kiwi
+    apple
+    orange
+
+***
+
+# awk
+
+`awk` is a tiny programming language for manipulating columns of data.
+
+## awk structure
+
+Basic awk program structure. Do {action} on line matching CONDITION.
+
+    BEGIN { ... }
+    CONDITION {action}
+    CONDITION {action}
+    END { ... }
+
+## awk print
+
+    $ awk -F, '{ print $0 }' foo3.txt 
+    apple,10
+    banana,5
+    kiwi,500
+    orange,1000
+    apple,18
+    kiwi,10000
+
+## awk extract a column
+
+Extract a column of text with awk, with column separator comma.
+
+    $ awk -F, '{ print $2 }' foo3.txt 
+    10
+    5
+    500
+    1000
+    18
+    10000
+
+## awk sum
+
+sum the numbers in the 2nd column. 
+
+    $ awk -F, '{ s+=$2 } END { print s }' foo3.txt 
+    11533
+
+## awk condition
+
+Only sum numbers > 100.
+
+    $ awk -F, '$2 > 100 { s+=$2 } END { print s }' foo3.txt 
+    11500
+
+Print lines where first column is longer than 4 characters. Implicit {print} as the action.
+
+    $ awk -F, 'length($1)>4' foo3.txt 
+    apple,10
+    banana,5
+    orange,1000
+    apple,18
 
 
 ***
