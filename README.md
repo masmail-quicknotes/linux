@@ -4,7 +4,7 @@
 
 - [grep](#grep)
 
-- [sort & uniq](#sort-uniq)
+- [sort & uniq](#sort--uniq)
 
 - [sed](#sed)
 
